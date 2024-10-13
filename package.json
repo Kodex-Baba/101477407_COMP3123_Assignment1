@@ -1,0 +1,33 @@
+{
+  "name": "101477407_comp3123_assignment1",
+  "version": "1.0.0",
+  "description": "This is an assignment for full stack dev",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kodex-Baba/101477407_COMP3123_Assignment1.git"
+  },
+  "keywords": [
+    "Login",
+    "signup"
+  ],
+  "author": "Akorede Daniel Osunkoya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kodex-Baba/101477407_COMP3123_Assignment1/issues"
+  },
+  "homepage": "https://github.com/Kodex-Baba/101477407_COMP3123_Assignment1#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.1",
+    "nodemon": "^3.1.7"
+  }
+}
