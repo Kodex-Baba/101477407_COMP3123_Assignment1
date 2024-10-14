@@ -1,6 +1,6 @@
 const express = require("express")
 const usersRoutes = require('./routes/users')
-// const employeesRoutes = require("./routes/employees")
+const employeesRoutes = require("./routes/employees")
 const mongoose = require("mongoose")
 
 // const DB_CONNECTION_STRING = "mongodb://localhost:27017/books"
@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(express.urlencoded())
 
 app.use("/api/v1", usersRoutes)
-// app.use("/api/v1", employeesRoutes)
+app.use("/api/v1/emp", employeesRoutes)
 
 app.route("/")
     .get((req, res) => {

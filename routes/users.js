@@ -3,9 +3,22 @@ const Users = require("../models/users");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken"); // Import JWT
+const { body, validationResult } = require("express-validator");
 
 // POST /api/v1/user/signup
-router.post("/user/signup", async (req, res) => {
+router.post("/user/signup", [
+    body("username").notEmpty().withMessage("Username is required."),
+    body("email").isEmail().withMessage("Invalid email address."),
+    body("password")
+        .isLength({ min: 6 })
+        .withMessage("Password must be at least 6 characters long.")
+], async (req, res) => {
+    // Validate the request
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
         const { username, email, password } = req.body;
 
@@ -20,7 +33,7 @@ router.post("/user/signup", async (req, res) => {
 
         await newUser.save();
         res.status(201).json({
-            message: "Users created successfully.",
+            message: "User created successfully.",
             user_id: newUser._id,
         });
     } catch (error) {
@@ -30,7 +43,16 @@ router.post("/user/signup", async (req, res) => {
 
 // POST /api/v1/user/login
 // User login
-router.post("/user/login", async (req, res) => {
+router.post("/user/login", [
+    body("email").isEmail().withMessage("Invalid email address."),
+    body("password").notEmpty().withMessage("Password is required.")
+], async (req, res) => {
+    // Validate the request
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { email, password } = req.body;
 
     try {
